@@ -15,11 +15,16 @@ var array2:process[] = [
   ]
    
   return (
-    <div className='side has-text-white'>
+    <div className='has-text-white px-6 py-3'>
       {array2.map((res:any) => (
-        <div key={res.order}>
-          <div>STEP {res.order}</div>
-          <div> {res.name} </div>
+        <div className='is-flex py-2'>
+          <div className='circle has-text-centered mr-3 my-2'>
+            {res.order+1}
+          </div>
+          <div key={res.order} className='py-1'>
+            <div className='is-size-7'>STEP {res.order}</div>
+            <div className='has-text-weight-bold is-uppercase'> {res.name} </div>
+          </div>
         </div>
       ))}
     </div>

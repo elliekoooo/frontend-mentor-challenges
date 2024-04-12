@@ -10,12 +10,16 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <div className='columns'>
-      <div className='column is-3'>
-        <Sidebar></Sidebar>
-      </div>
-      <div className='column is-9'>
-        <Content></Content>
+    <div className='container my-6 py-6'>
+      <div className='box'>
+        <div className='columns'>
+          <div className='side column mx-3 my-3 is-3'>
+            <Sidebar></Sidebar>
+          </div>
+          <div className='column is-9'>
+            <Content></Content>
+          </div>
+        </div>
       </div>
     </div>
   </React.StrictMode>
