@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Sidebar from 'components/Sidebar';
-import 'bulma/css/bulma.css';
+import 'bulma/css/bulma.min.css';
+import 'bulma-switch/dist/css/bulma-switch.min.css'
 import "./styles/global.css"
-import Content from 'components/Content';
+import YourInfo from 'pages/YourInfo';
+import SelectPlan from 'pages/SelectPlan';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +19,8 @@ root.render(
             <Sidebar></Sidebar>
           </div>
           <div className='column is-9'>
-            <Content></Content>
+            {/* <YourInfo></YourInfo> */}
+            <SelectPlan></SelectPlan>
           </div>
         </div>
       </div>

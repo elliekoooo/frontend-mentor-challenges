@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Content: any = (array: any) => {
+const YourInfo: any = () => {
   return (
     <div className='my-5'>
       <div className='is-size-2 has-text-weight-bold'>
@@ -28,7 +28,7 @@ const Content: any = (array: any) => {
             <input className='input' type='text' placeholder='e.g. +1 234 567 890' ></input>
           </div>
         </div>
-        <div className='field is-grouped is-grouped-right test'>
+        <div className='field is-grouped is-grouped-right'>
           <p className='control is-vcentered'>
             <button className='button is-medium is-link'>
               <span className='is-size-6'>Next step</span>
@@ -41,4 +41,4 @@ const Content: any = (array: any) => {
   );
 }
 
-export default Content;
+export default YourInfo;
