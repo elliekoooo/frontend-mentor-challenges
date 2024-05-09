@@ -6,6 +6,7 @@ import 'bulma-switch/dist/css/bulma-switch.min.css'
 import "./styles/global.css"
 import YourInfo from 'pages/YourInfo';
 import SelectPlan from 'pages/SelectPlan';
+import AddOns from 'pages/AddOns';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,7 +21,8 @@ root.render(
           </div>
           <div className='column is-9'>
             {/* <YourInfo></YourInfo> */}
-            <SelectPlan></SelectPlan>
+            {/* <SelectPlan></SelectPlan> */}
+            <AddOns></AddOns>
           </div>
         </div>
       </div>
