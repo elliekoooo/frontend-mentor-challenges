@@ -1,0 +1,43 @@
+html {
+  background-color: hsl(0, 0%, 86%);
+}
+
+.section {
+  height: 90vh;
+}
+
+.box {
+  max-width: fit-content;
+  min-width: auto;
+  border-radius: 5% 5% 30% 5%;
+}
+
+.line {
+  border-top: 1px solid lightgrey;
+  opacity: 0.3;
+  position: relative;
+  left:3%;
+}
+
+.circle {
+  border-radius: 50%;
+  position: relative;
+  bottom: 50%;
+}
+
+.purple {
+  background-color: hsl(259, 100%, 65%)
+}
+
+@font-face {
+  font-family: Poppins-BoldItalic;
+  src: url('assets/fonts/Poppins-BoldItalic.ttf');
+  font-weight: 900;
+} 
+.font {
+  font-family: Poppins-BoldItalic;
+}
+.font-purple {
+  color: hsl(259, 100%, 65%);
+}
+
