@@ -1,8 +1,8 @@
 import 'bulma/css/bulma.css'
 import './App.css'
-import React, { useState } from 'react';
+import { useState } from 'react';
 import arrow from 'assets/images/icon-arrow.svg'
-import valid from 'Validation';
+import valid, { errorMessage } from 'Validation';
 
 type dateNums = {
     day: number,
@@ -11,13 +11,33 @@ type dateNums = {
 }
 
 const curr:Date = new Date();
-
 const isPositive = (num: number): number => {
   return Math.sign(num);
 };
+
+const countDaysInMonth = (year: number, month: number) => {
+  return new Date(year, month, 0).getDate();
+};
+
+const resetValue = () => {
+  return {
+    day: '--',
+    month: '--',
+    year: '--'
+  }
+};
     
 const calculate = (_date: dateNums) => {
-    const currDate:dateNums = {day: curr.getDate(), month: curr.getMonth()+1, year: curr.getFullYear() };
+    if(_date.day == 0 || _date.month == 0 || _date.year == 0 || errors.day != '' || errors.month != '' || errors.year != ''){
+      return resetValue();
+    };
+
+    if(countDaysInMonth(_date.year, _date.month) < _date.day){
+      errors.day = errorMessage.day;
+      return resetValue();
+    }
+
+    const currDate:dateNums = { day: curr.getDate(), month: curr.getMonth()+1, year: curr.getFullYear() };
     const inputDate:dateNums = _date;
 
     const diffDay:number = currDate.day - inputDate.day;
@@ -28,12 +48,13 @@ const calculate = (_date: dateNums) => {
       day: isPositive(diffDay) === -1 ? diffDay+30 : diffDay,
       month: isPositive(diffMonth) === -1 ? diffMonth+12 : diffMonth,
       year: isPositive(diffMonth) === -1 ? diffYear-1 : diffYear
-    }
+    };
 
     return diff;  
 };
 
-let errors:any = {};
+let errors: {day?: string, month?: string, year?: string}={};
+
 function App() {
   const [date, setDate] = useState({
     day: 0,
@@ -44,7 +65,7 @@ function App() {
   const getDate = (e: any) => {
     setDate((prev:any) => {
       return {
-        ...prev, [e.target.name]: e.target.value
+        ...prev, [e.target.name]: e.target.value ?? 0
       };
     });
   };
@@ -57,8 +78,8 @@ function App() {
               <div className='field'>
                 <label className='label is-small has-text-grey'>DAY</label>
                 <div className='control'>
-                  <input className='input is-size-5 has-text-weight-bold' name='day' type='number' onChange={getDate} onBlur={(e)=>errors = valid(e)}></input>
-                  <span className='is-size-7 has-text-danger'>{errors.name === 'day' ? errors.message : ""}</span>
+                  <input className='input is-size-5 has-text-weight-bold' name='day' type='number' onChange={getDate} onInput={(e)=>errors['day'] = valid(e)}></input>
+                  <span className='is-size-7 has-text-danger'>{errors.day}</span>
                 </div> 
               </div>
             </div>
@@ -66,8 +87,8 @@ function App() {
               <div className='field'>
                 <label className='label is-small has-text-grey'>MONTH</label>
                 <div className='control'>
-                  <input className='input is-size-5 has-text-weight-bold' name='month' type='text' onChange={getDate} onBlur={(e)=>errors = valid(e)}></input>
-                  <span className='is-size-7 has-text-danger'>{errors.name === 'month' ? errors.message : ""}</span>
+                  <input className='input is-size-5 has-text-weight-bold' name='month' type='number' onChange={getDate} onInput={(e)=>errors['month'] = valid(e)}></input>
+                  <span className='is-size-7 has-text-danger'>{errors.month}</span>
                 </div>
               </div>
             </div>
@@ -75,8 +96,8 @@ function App() {
               <div className='field'>
                 <label className='label is-small has-text-grey'>YEAR</label>
                 <div className='control'>
-                  <input className='input is-size-5 has-text-weight-bold' name='year' type='text' onChange={getDate} onBlur={(e)=>errors = valid(e)}></input>
-                  <span className='is-size-7 has-text-danger'>{errors.name === 'year' ? errors.message : ""}</span>
+                  <input className='input is-size-5 has-text-weight-bold' name='year' type='number' onChange={getDate} onInput={(e)=>errors['year'] = valid(e)}></input>
+                  <span className='is-size-7 has-text-danger'>{errors.year}</span>
                 </div>
               </div>
             </div>
