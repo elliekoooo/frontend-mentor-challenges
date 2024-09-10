@@ -2,6 +2,7 @@ import 'bulma/css/bulma.css'
 import './App.css'
 import React, { useState } from 'react';
 import arrow from 'assets/images/icon-arrow.svg'
+import valid from 'Validation';
 
 type dateNums = {
     day: number,
@@ -9,7 +10,7 @@ type dateNums = {
     year: number
 }
 
-const curr = new Date();
+const curr:Date = new Date();
 
 const isPositive = (num: number): number => {
   return Math.sign(num);
@@ -32,6 +33,7 @@ const calculate = (_date: dateNums) => {
     return diff;  
 };
 
+let errors:any = {};
 function App() {
   const [date, setDate] = useState({
     day: 0,
@@ -50,40 +52,41 @@ function App() {
   return (
       <section className='section is-flex is-justify-content-center is-align-items-center'>
         <div className='box is-rounded'>
-          <div className='columns is-gap-2 mx-3 my-5'>
-            <div className='column is-12'>
+          <div className='columns is-mobile mx-3 my-5'>
+            <div className='column is-3-desktop is-3-tablet'>
               <div className='field'>
                 <label className='label is-small has-text-grey'>DAY</label>
                 <div className='control'>
-                  <input className='input' name='day' type='text' onChange={getDate}></input>
+                  <input className='input is-size-5 has-text-weight-bold' name='day' type='number' onChange={getDate} onBlur={(e)=>errors = valid(e)}></input>
+                  <span className='is-size-7 has-text-danger'>{errors.name === 'day' ? errors.message : ""}</span>
                 </div> 
               </div>
             </div>
-            <div className='column is-3'>
+            <div className='column is-3-desktop is-3-tablet'>
               <div className='field'>
                 <label className='label is-small has-text-grey'>MONTH</label>
                 <div className='control'>
-                  <input className='input' name='month' type='text' onChange={getDate}></input>
+                  <input className='input is-size-5 has-text-weight-bold' name='month' type='text' onChange={getDate} onBlur={(e)=>errors = valid(e)}></input>
+                  <span className='is-size-7 has-text-danger'>{errors.name === 'month' ? errors.message : ""}</span>
                 </div>
               </div>
             </div>
-            <div className='column is-3'>
+            <div className='column is-3-desktop is-3-tablet'>
               <div className='field'>
                 <label className='label is-small has-text-grey'>YEAR</label>
                 <div className='control'>
-                  <input className='input' name='year' type='text' onChange={getDate}></input>
+                  <input className='input is-size-5 has-text-weight-bold' name='year' type='text' onChange={getDate} onBlur={(e)=>errors = valid(e)}></input>
+                  <span className='is-size-7 has-text-danger'>{errors.name === 'year' ? errors.message : ""}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className='columns mr-6 my-1 is-gapless'>
-            <div className='column is-11 line'></div>
-            <div className='column is-1'>
-              <figure className='image is-64x64 px-3 py-3 circle purple'>
-                <img src={arrow}></img>
-              </figure>
-            </div>
+          <div className='divider mx-5'>
+            <figure className='image is-64x64 px-4 py-4 purple circle'>
+              <img src={arrow}></img>
+            </figure>
           </div>
+          <div className='mx-1 my-5'>
           <div className='font is-italic is-size-1 has-text-weight-bold mx-5'>
             <p className=''>
               <span className='font-purple'>{calculate(date).year}</span> years
@@ -94,6 +97,7 @@ function App() {
             <p className=''>
             <span className='font-purple'>{calculate(date).day}</span> days
             </p>
+          </div>
           </div>
         </div>
       </section>

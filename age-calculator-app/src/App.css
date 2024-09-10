@@ -12,18 +12,26 @@ html {
   border-radius: 5% 5% 30% 5%;
 }
 
-.line {
+.divider {
   border-top: 1px solid lightgrey;
-  opacity: 0.3;
   position: relative;
-  left:3%;
+}
+
+/* .circle-mobile {
+  border-radius: 50%;
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .circle {
   border-radius: 50%;
-  position: relative;
-  bottom: 50%;
-}
+  position: absolute;
+  top: -30px;
+  left: 97%;
+  transform: translateX(-50%);
+} */
 
 .purple {
   background-color: hsl(259, 100%, 65%)
@@ -41,3 +49,22 @@ html {
   color: hsl(259, 100%, 65%);
 }
 
+@media screen and (min-width: 431px) {
+  .circle {
+    border-radius: 50%;
+    position: absolute;
+    top: -30px;
+    left: 97%;
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 430px) {
+  .circle {
+    border-radius: 50%;
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
