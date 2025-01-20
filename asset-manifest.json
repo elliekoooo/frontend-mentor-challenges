@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/portfolio/age-calculator-app/static/css/main.c6fcdb90.css",
+    "main.js": "/portfolio/age-calculator-app/static/js/main.2d2ed5c5.js",
+    "static/js/453.3ba1e50c.chunk.js": "/portfolio/age-calculator-app/static/js/453.3ba1e50c.chunk.js",
+    "static/media/Poppins-BoldItalic.ttf": "/portfolio/age-calculator-app/static/media/Poppins-BoldItalic.cfb635a5111b545f5598.ttf",
+    "index.html": "/portfolio/age-calculator-app/index.html",
+    "static/media/icon-arrow.svg": "/portfolio/age-calculator-app/static/media/icon-arrow.76e952b1b427b84b83bd01f2f4822499.svg",
+    "main.c6fcdb90.css.map": "/portfolio/age-calculator-app/static/css/main.c6fcdb90.css.map",
+    "main.2d2ed5c5.js.map": "/portfolio/age-calculator-app/static/js/main.2d2ed5c5.js.map",
+    "453.3ba1e50c.chunk.js.map": "/portfolio/age-calculator-app/static/js/453.3ba1e50c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c6fcdb90.css",
+    "static/js/main.2d2ed5c5.js"
+  ]
+}
