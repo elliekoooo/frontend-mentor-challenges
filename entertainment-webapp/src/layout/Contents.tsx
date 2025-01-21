@@ -3,7 +3,7 @@ import { Search } from "../components/Search";
 export const Contents = () => {
 
     return (
-        <div className="mx-6">
+        <div>
             <div className="my-6">
                 <Search></Search>
             </div>
