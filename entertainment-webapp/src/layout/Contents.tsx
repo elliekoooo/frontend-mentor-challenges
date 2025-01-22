@@ -1,4 +1,6 @@
+
 import { Search } from "../components/Search";
+import { Trending } from "../components/Trending";
 
 export const Contents = () => {
 
@@ -7,7 +9,9 @@ export const Contents = () => {
             <div className="my-6">
                 <Search></Search>
             </div>
-            Contents
+            <div  className="my-6">
+                 <Trending />
+            </div>
         </div>
     )
 
