@@ -1,18 +1,11 @@
 import search from '../assets/icon-search.svg';
 import './Search.css';
-import data from '../assets/data.json';
-import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { set } from '../store/index'
 
 export const Search = () => {
-    const [searchWord, setSearchWord] = useState("");
-    const [searchData, setSearchData] = useState([] as any);
+    const dispatch = useDispatch();
 
-    useEffect(()=> {
-        if(searchWord !== "")
-            setSearchData(data?.filter(d => (d.title).indexOf(searchWord.trim()) > -1));
-    }, [searchWord]);
-
-    console.log(searchData);
     return (
         <div className=''>
             <div className="field is-horizontal">
@@ -25,18 +18,13 @@ export const Search = () => {
                                 </figure>
                             </div>
                             <div className="control is-expanded">
-                                <input type='text' onChange={(e)=>{setSearchWord(e.target.value)}
+                                <input type='text' onChange={(e)=>{ dispatch(set(e.target.value))}
                                 } className="input has-background-black border-style is-size-5 has-text-white" placeholder="Search for movies or TV series"></input>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {
-                searchData.map((d:any, k:number) => (
-                    <div key={k} className='has-text-white'>{d?.title}</div>
-                ))
-            }
         </div>
     )
 };
