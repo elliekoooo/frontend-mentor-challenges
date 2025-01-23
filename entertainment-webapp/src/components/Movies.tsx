@@ -63,20 +63,23 @@ export const Movies = () => {
         <div className='section'>
             <h1 className='title has-text-white'>Recommended for you</h1>
           
-              <div className='grid has-4-cols'>
+              <div className='columns has-4-cols'>
                 {data.map((item, index) => {
                     return (
-                        <div key={index} className="">
-                          <img className ="image" src={imaUrl+item.thumbnail.regular.small} />
-                          <div className='bookmark'>
-                            <p> {item.isBookmarked ? 'on' : 'off'}</p>
-                          </div>
-                          <div className="item-text">
-                            <div className="title-sub">
+                        <div key={index} className="image is-relative">
+                          <img className ="image is-relative" src={imaUrl+item.thumbnail.regular.small} />
+                          <div className="is-overlay has-text-success has-text-centered">
+                            <div className='bookmark'>
+                              <p> {item.isBookmarked ? 'on' : 'off'}</p>
+                            </div>
+
                               <p>{item.year}</p>
                               <p>{item.category}</p>
                               <p>{item.rating}</p>
                             </div>
+                          
+                          <div className="item-text">
+                          
                             <div className="title">{item.title}</div>
                           </div>
                         </div> 
