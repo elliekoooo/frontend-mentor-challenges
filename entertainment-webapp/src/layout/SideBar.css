@@ -1,5 +1,49 @@
-.side-box {
+.box {
     background-color: #161d2f !important;
-    border-radius: 20px;
-    height: 100vh;
+    border-radius: 15px;
 }
+
+/* Desktop */
+@media screen and (min-width: 768px) {
+    .side {
+        height: 100vh;
+    }
+
+    .box {
+        height: 90vh;
+        flex-direction: column;
+        gap: 2rem;
+        margin: auto;
+    }
+
+    .logo {
+        margin: 5px;
+    }
+
+    .avatar {
+        margin-top: auto;
+    }
+
+}
+
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .box {
+        width: 90%;
+        height: 50px;
+        flex-direction: row;
+        gap: 1rem;
+        margin-top: 5%;
+    }
+
+    .logo {
+        margin-right: auto;
+    }
+
+    .avatar {
+        margin-left: auto;
+    }
+}
+
+

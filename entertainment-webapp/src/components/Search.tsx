@@ -1,10 +1,12 @@
 import search from '../assets/icon-search.svg';
 import './Search.css';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { set } from '../store/index'
 
 export const Search = () => {
     const dispatch = useDispatch();
+
+    const searchWord = useSelector((state:any) => state.searchReducer);
 
     return (
         <div className=''>
@@ -25,6 +27,9 @@ export const Search = () => {
                     </div>
                 </div>
             </div>
+            {
+                <div className="has-text-white is-size-4">{searchWord.length == 0 ? "" : "Found 2 results for "+searchWord}</div>
+            }
         </div>
     )
 };
