@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import classes from './Movies.modules.css';
-// 데이터 타입 정의
+import bookMarKOff from '../assets/icon-bookmark-empty.svg';
+import bookMarkOn from '../assets/icon-bookmark-full.svg';
+
 interface Thumbnail {
   trending: {
     small: string;
@@ -23,13 +24,14 @@ interface MovieSeries {
   isTrending: boolean;
 }
 
-export const Movies = () => {
+export interface Category {
+  category : string;
+}
+export const Movies = (props : Category) => {
 
   const [ data , setData ] = useState<MovieSeries[]>([]);
   const [ loading , setLoading ] = useState<boolean>(true);
   const [ error , setError ] = useState<string>();
-
-
 
   let imaUrl = 'http://localhost:5173/src/';
     useEffect( () => {
@@ -51,8 +53,14 @@ export const Movies = () => {
     }, []);// 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행
 
     console.log(data);
-
+    let filteredData : any[];
+    if(props.category != "all"){
+      filteredData = data.filter((item) => item.category.toLowerCase().includes(props.category.toLowerCase()));
     
+    }else{
+      filteredData = data;
+    }
+  
     if(error){
       return <div>error: {error}</div>;
     }
@@ -60,28 +68,29 @@ export const Movies = () => {
       return <div>Loading...{loading}</div>;
     }
     return (
-        <div className='section'>
-            <h1 className='title has-text-white'>Recommended for you</h1>
-          
-              <div className='grid has-4-cols'>
-                {data.map((item, index) => {
+        <div className='column'>
+          <h1 className='title has-text-white'>Recommended for you</h1>
+          <div className="columns is-multiline">
+              {filteredData!.map((item, index) => {
                     return (
-                        <div key={index} className="">
-                          <img className ="image" src={imaUrl+item.thumbnail.regular.small} />
-                          <div className='bookmark'>
-                            <p> {item.isBookmarked ? 'on' : 'off'}</p>
-                          </div>
-                          <div className="item-text">
-                            <div className="title-sub">
-                              <p>{item.year}</p>
-                              <p>{item.category}</p>
-                              <p>{item.rating}</p>
-                            </div>
-                            <div className="title">{item.title}</div>
-                          </div>
-                        </div> 
-                      )
-                  })}
+                      <div key={index} className="column is-6-mobile is-4-tablet is-3-desktop is-relative">
+                        <img className ="image" src={imaUrl+item.thumbnail.regular.small} />
+                        <div className='is-overlay has-text-centered'>
+                          <button className="button is-rounded">
+                            <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                          </button>
+                        </div>
+                            <p>{item.year}</p>
+                            <p>{item.category}</p>
+                            <p>{item.rating}</p>
+                          
+                        
+                        <div className="item-text">
+                          <div className="title">{item.title}</div>
+                        </div>
+                      </div> 
+                    )
+                })}
             </div>
         </div>
    

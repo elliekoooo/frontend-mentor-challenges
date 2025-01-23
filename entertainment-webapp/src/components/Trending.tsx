@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
+import bookMarKOff from '../assets/icon-bookmark-empty.svg';
+import bookMarkOn from '../assets/icon-bookmark-full.svg';
 // 데이터 타입 정의
 interface Thumbnail {
   trending: {
@@ -72,26 +70,27 @@ export const Trending = () => {
       return <div>Loading...{loading}</div>;
     }
     return (
-        <div className='section'>
+        <div className='container'>
             <h1 className='title has-text-white'>Trending</h1>
             {/* <Slider {...settings}> */}
-            <div className='grid is-inline-flex'>
-
-            
-            {data.slice(0, 5).map((item, index) => {
+            <div className='columns'>
+            {data.filter((item) => item.isTrending == true).map((item, index) => {
                 return (
-                    <div key={index} className="cell">
-                      <img className ="image" src={imaUrl+item.thumbnail.regular.medium} />
-                      <div className='bookmark'>
-                        <p> {item.isBookmarked ? 'on' : 'off'}</p>
-                      </div>
-                      <div className="item-text">
-                        <div className="title-sub">
-                          <p>{item.year}</p>
-                          <p>{item.category}</p>
-                          <p>{item.rating}</p>
-                        </div>
-                        <div className="title">{item.title}</div>
+                    <div key={index} className="column is-4-desktop  is-relative">
+                      <img className ="image is-3by2" src={imaUrl+item.thumbnail.regular.medium} />
+                      <div className='is-overlay has-text-centered'>
+                        <button className="button is-rounded">
+                          <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                        </button>
+                           
+                            <div className="item-text">
+                              <div className="title-sub">
+                                <p>{item.year}</p>
+                                <p>{item.category}</p>
+                                <p>{item.rating}</p>
+                              </div>
+                              <div className="title">{item.title}</div>
+                          </div>
                       </div>
                     </div> 
                   )
