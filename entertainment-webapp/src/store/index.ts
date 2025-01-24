@@ -25,11 +25,11 @@ const bookmarkReducer = createSlice({
     }
 });
 
-const categoryReducer = createSlice({
-    name: "categoryReducer",
+const menuReducer = createSlice({
+    name: "menuReducer",
     initialState: "home",
     reducers: {
-        setCategory: (_state, action: PayloadAction<string>) => {
+        menu: (_state, action: PayloadAction<string>) => {
             return action.payload;            
         }
     }
@@ -40,13 +40,13 @@ const store = configureStore({
     reducer: {
         searchReducer: searchReducer.reducer,
         bookmarkReducer: bookmarkReducer.reducer,
-        categoryReducer: categoryReducer.reducer
+        menuReducer: menuReducer.reducer
     }
 });
 
 
 export const { get, set } = searchReducer.actions;
 export const { change } = bookmarkReducer.actions;
-export const { setCategory } = categoryReducer.actions;
+export const { menu } = menuReducer.actions;
 
 export default store;
