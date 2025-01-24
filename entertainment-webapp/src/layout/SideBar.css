@@ -1,6 +1,8 @@
 .box {
     background-color: #161d2f !important;
     border-radius: 15px;
+    position: fixed;
+    z-index: 9999;
 }
 
 figure {
@@ -43,6 +45,7 @@ figure:hover {
         flex-direction: row;
         gap: 1rem;
         margin-top: 5%;
+        top: 0;
     }
 
     .logo {

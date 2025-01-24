@@ -1,5 +1,11 @@
 import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
 
+export const menuObject = {
+    home: "movies or TV series",
+    movies: "movies",
+    tv_series: "TV series",
+    bookmark: "Bookmarked shows"
+} as any;
 
 
 const searchReducer = createSlice({
@@ -29,8 +35,8 @@ const menuReducer = createSlice({
     name: "menuReducer",
     initialState: "home",
     reducers: {
-        menu: (_state, action: PayloadAction<string>) => {
-            return action.payload;            
+        curr: (state:any, _action: PayloadAction<string>) => {
+            return _action.payload;
         }
     }
 });
@@ -47,6 +53,6 @@ const store = configureStore({
 
 export const { get, set } = searchReducer.actions;
 export const { change } = bookmarkReducer.actions;
-export const { menu } = menuReducer.actions;
+export const { curr } = menuReducer.actions;
 
 export default store;

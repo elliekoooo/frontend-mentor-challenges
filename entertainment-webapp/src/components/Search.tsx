@@ -1,12 +1,13 @@
 import search from '../assets/icon-search.svg';
 import './Search.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { set } from '../store/index'
+import { menuObject, set } from '../store/index'
 
 export const Search = () => {
     const dispatch = useDispatch();
 
     const searchWord = useSelector((state:any) => state.searchReducer);
+    const menu = useSelector((state:any) => state.menuReducer);
 
     return (
         <div className=''>
@@ -21,14 +22,14 @@ export const Search = () => {
                             </div>
                             <div className="control is-expanded">
                                 <input type='text' onChange={(e)=>{ dispatch(set(e.target.value))}
-                                } className="input has-background-black border-style is-size-5 has-text-white" placeholder="Search for movies or TV series"></input>
+                                } className="input has-background-black border-style is-size-5 has-text-white" placeholder={"Search for " + menuObject[menu]}></input>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             {
-                <div className="has-text-white is-size-4">{searchWord.length == 0 ? "" : "Found 2 results for "+searchWord}</div>
+                <div className="has-text-white is-size-4">{searchWord.length == 0 ? "" : "Found 2 results for "+ (searchWord)}</div>
             }
         </div>
     )

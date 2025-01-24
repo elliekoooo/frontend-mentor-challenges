@@ -92,12 +92,12 @@ export const Movies = (props : Category) => {
     return (
         <>
           <h1 className='title has-text-white'>Recommended for you</h1>
-          <div className="columns is-multiline is-2">
+          <div className="columns is-multiline is-mobile is-2">
               {data!.map((item) => {
                 return (
                   <div 
                     key={item.id} 
-                    className="column is-full-mobile is-4-tablet is-3-desktop is-relative"
+                    className="column is-6-mobile is-4-tablet is-3-desktop is-relative"
                   >
                     <img className ="image" src={url+item.thumbnail.regular.small} />
                     <div className='is-overlay has-text-centered'>
