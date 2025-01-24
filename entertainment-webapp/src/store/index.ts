@@ -2,8 +2,8 @@ import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
 
 export const menuObject = {
     home: "movies or TV series",
-    movies: "movies",
-    tv_series: "TV series",
+    movie: "movies",
+    tvseries: "TV series",
     bookmark: "Bookmarked shows"
 } as any;
 

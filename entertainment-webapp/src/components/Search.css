@@ -1,22 +1,17 @@
 .border-style {
-    border: none;
     border-bottom: 1px solid gray;
 }
 
-/* .input:focus  {
-    color: white;
+.no-border {
     border: none;
-    border-bottom: 1px solid gray;
-    outline: none !important; 
 }
 
-.input:focus-visible {
-    border: none;
-    outline: none !important;
-} */
-
+.no-border:focus {
+    outline: none; /* 기본 브라우저 outline 제거 */
+    box-shadow: none; /* Bulma 기본 shadow 제거 */
+    border-color: inherit; /* 테두리 색상을 기본으로 되돌림 */
+}
 
 .input::placeholder {
     color: gray !important;
 }
-

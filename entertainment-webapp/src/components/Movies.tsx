@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import bookMarKOff from '../assets/icon-bookmark-empty.svg';
 import bookMarkOn from '../assets/icon-bookmark-full.svg';
+import { useSelector } from 'react-redux';
 
 interface Thumbnail {
   trending: {
@@ -30,11 +31,15 @@ export interface Category {
 }
 
 
-export const Movies = (props : Category) => {
+export const Movies = () => {
   const [ data , setData ] = useState<MovieSeries[]>([]);
   const [ loading , setLoading ] = useState<boolean>(true);
   const [ error , setError ] = useState<string>();
 
+  const [filterData, setFilterData] = useState<MovieSeries[]>([]);
+
+  const currentMenu = useSelector((state:any) => state.menuReducer);
+  const searchWord = useSelector((state:any) => state.searchReducer);
 
   let url = 'http://localhost:5173/src/';
 
@@ -53,17 +58,7 @@ export const Movies = (props : Category) => {
           id: index + Math.random(),
         }));
         setData(updatedData);
-
-        let filteredData : MovieSeries[] = [];
-        if(props.category != "all"){
-         
-          filteredData = data.filter((item : MovieSeries) =>
-            item.category.toLowerCase().includes(props.category.toLowerCase())
-          );
-          setData(filteredData);
-          console.log("filter"+data);
-        }
-       
+        setFilterData(updatedData);       
         setLoading(false);
       })
       .catch((error) => {
@@ -71,6 +66,26 @@ export const Movies = (props : Category) => {
         setLoading(true);
       });
     }, []);// 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행
+
+
+    //side bar 선택에 따라서 데이터 뿌려주기
+    useEffect(() => {
+      const _data = data;
+      if(currentMenu == "bookmark"){
+        setFilterData(_data.filter((item:MovieSeries)=> item.isBookmarked));
+      }else if(currentMenu == "home"){
+        setFilterData(_data);
+      }else{
+        const filteredData : MovieSeries[] = _data.filter((item: MovieSeries) => (currentMenu == item.category?.toLowerCase().replace(/(\s*)/g, "")));
+        setFilterData(filteredData);
+      }
+    }, [currentMenu]);
+
+    //검색어에 의해 데이터 뿌려주기
+    useEffect(() => {
+      const _data = data;
+      setFilterData(_data.filter((item: MovieSeries)=> (item.title.toLowerCase()).indexOf(searchWord.toLowerCase()) > -1));
+    }, [searchWord]);
     
 
    const bookmarkHandler = (id : string) => {
@@ -89,11 +104,30 @@ export const Movies = (props : Category) => {
       return <div>Loading...{loading}</div>;
     }
 
+    let title;
+    switch(currentMenu){
+      case "home":
+        title = "Recommended for you";
+        break;
+      case "movie":
+        title = "Movies";
+        break;
+      case "tvseries":
+        title = "TV Series";
+        break;
+      case "bookmark":
+        title = "Bookmarked Movies";
+        break;
+    }
+
     return (
         <>
-          <h1 className='title has-text-white'>Recommended for you</h1>
+          <div className="has-text-white is-size-4">{searchWord.length == 0 ? "" : "Found "+ (filterData.length) +" results for "+ searchWord}</div>
+          <h1 className='title has-text-white'>
+            { title }
+          </h1>
           <div className="columns is-multiline is-mobile is-2">
-              {data!.map((item) => {
+              {filterData!.map((item) => {
                 return (
                   <div 
                     key={item.id} 
