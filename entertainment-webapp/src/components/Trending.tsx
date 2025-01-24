@@ -16,6 +16,7 @@ interface Thumbnail {
 }
 
 interface MovieSeries {
+  id :  string;
   title: string;
   thumbnail: Thumbnail;
   year: number;
@@ -30,6 +31,13 @@ export const Trending = () => {
   const [data , setData ] = useState<MovieSeries[]>([]);
   const [loading, setLoading ] = useState<boolean>(true);
   const [ error , setError ] = useState<string>();
+
+  const bookmarkHandler = (id : string) => {
+    const updateBookmark = data.map((item : MovieSeries) =>
+    item.id == id ? { ...item, isBookmarked: !item.isBookmarked } : item
+  );
+  setData(updateBookmark);
+ }
 
   const settings = {
     arrows: false, // 화살표 표시 여부
@@ -51,7 +59,12 @@ export const Trending = () => {
         return response.json();
       } )
       .then( (data) => {
-        setData(data)
+          let updatedData : MovieSeries[] = [];
+          updatedData = data.map((item: MovieSeries, index: number) => ({
+          ...item,
+          id: index + Math.random(),
+        }));
+        setData(updatedData);
         setLoading(false);
       })
       .catch((error) => {
@@ -60,9 +73,8 @@ export const Trending = () => {
       });
     }, []);// 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행
 
-    console.log(data);
+    //console.log(data);
 
-    
     if(error){
       return <div>error: {error}</div>;
     }
@@ -79,18 +91,21 @@ export const Trending = () => {
                     <div key={index} className="column is-4-desktop  is-relative">
                       <img className ="image is-3by2" src={imaUrl+item.thumbnail.regular.medium} />
                       <div className='is-overlay has-text-centered'>
-                        <button className="button is-rounded">
+                        <button 
+                          className="button is-dark is-rounded"
+                          onClick={() => bookmarkHandler(item.id)}
+                        >
                           <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                         </button>
                            
-                            <div className="item-text">
-                              <div className="title-sub">
-                                <p>{item.year}</p>
-                                <p>{item.category}</p>
-                                <p>{item.rating}</p>
-                              </div>
-                              <div className="title">{item.title}</div>
+                        <div className="item-text">
+                          <div className="title-sub">
+                            <p>{item.year}</p>
+                            <p>{item.category}</p>
+                            <p>{item.rating}</p>
                           </div>
+                          <div className="title">{item.title}</div>
+                      </div>
                       </div>
                     </div> 
                   )
