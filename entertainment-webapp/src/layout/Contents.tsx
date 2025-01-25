@@ -12,7 +12,7 @@ export const Contents = () => {
                 <Search></Search>
             </div>
             <div className="my-6">
-                {/* <Trending /> */}
+                <Trending /> 
                 <Movies/>
             </div>
         </div>

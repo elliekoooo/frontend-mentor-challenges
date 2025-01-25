@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Slide } from './Slide';
 
 import bookMarKOff from '../assets/icon-bookmark-empty.svg';
 import bookMarkOn from '../assets/icon-bookmark-full.svg';
+
+import movie from '../assets/icon-category-movie.svg'
+import tv from '../assets/icon-category-tv.svg'
 // 데이터 타입 정의
 interface Thumbnail {
   trending: {
@@ -39,16 +43,6 @@ export const Trending = () => {
   setData(updateBookmark);
  }
 
-  const settings = {
-    arrows: false, // 화살표 표시 여부
-    autoplay: false, // 자동 재생 설정
-    dots: false, // 페이지네이션을 위한 dots 사용 여부
-    infinite: true, // 슬라이드가 무한반복하도록 적용
-    speed: 1000, // 슬라이드가 넘어가는 속도(ms)
-    slidesToShow: 3, // 한 화면에 몇 개의 슬라이드를 보여줄 것인지
-    slidesToScroll: 1, // 한번에 넘어갈 슬라이드의 갯수
-  };
-
   let imaUrl = 'http://localhost:5173/src/';
     useEffect( () => {
        fetch("http://localhost:5173/src/assets/data.json")
@@ -71,9 +65,7 @@ export const Trending = () => {
         setError(error.message);
         setLoading(true);
       });
-    }, []);// 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행
-
-    //console.log(data);
+    }, []);
 
     if(error){
       return <div>error: {error}</div>;
@@ -82,37 +74,46 @@ export const Trending = () => {
       return <div>Loading...{loading}</div>;
     }
     return (
-        <div className='container'>
-            <h1 className='title has-text-white'>Trending</h1>
-            {/* <Slider {...settings}> */}
-            <div className='columns'>
+        <>
+          <h1 className='title has-text-white'>Trending</h1>
+          <Slide>
             {data.filter((item) => item.isTrending == true).map((item, index) => {
-                return (
-                    <div key={index} className="column is-4-desktop  is-relative">
-                      <img className ="image is-3by2" src={imaUrl+item.thumbnail.regular.medium} />
-                      <div className='is-overlay has-text-centered'>
-                        <button 
-                          className="button is-dark is-rounded"
-                          onClick={() => bookmarkHandler(item.id)}
-                        >
-                          <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
-                        </button>
-                           
-                        <div className="item-text">
-                          <div className="title-sub">
-                            <p>{item.year}</p>
-                            <p>{item.category}</p>
-                            <p>{item.rating}</p>
-                          </div>
-                          <div className="title">{item.title}</div>
+              return (
+                  <div key={index} className="column is-6-mobile is-4-tablet is-4-desktop  is-relative ">
+                    <img className ="image is-4by3 " src={imaUrl+item.thumbnail.regular.medium} />
+                    <div className='is-overlay has-text-centered'>
+                     
+                          
+                      <div className="columns is-multiline is-mibile">
+                        <div className="column is-full">
+                          <button 
+                            className="button is-dark is-rounded has-background-dark"
+                            onClick={() => bookmarkHandler(item.id)}
+                          >
+                            <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                          </button>
+                        </div>
+                        <div className="column pb-0 is-full">
+                            <div className="columns  subtitle is-6 has-text-grey-lighter ">
+                              <div className="column">{item.year}</div>
+                              <div className="column">
+                                  <img src={item.category == 'Movie' ? movie : tv}/>
+                                  {item.category}
+                              </div>
+                              <div className="column">{item.rating}</div>
+                            </div>
+                        </div>
+                        <div className="column is-full is-12 ">
+                          <p className='title is-4 has-text-white-ter has-text-left has-text-weight-semibold'>{item.title}</p>
+                        </div>
                       </div>
-                      </div>
-                    </div> 
-                  )
-              })}
-           {/* </Slider> */}
-           </div>
-        </div>
+                   
+                    </div>
+                  </div> 
+                )
+            })}
+          </Slide>
+        </>
    
     );
 }
