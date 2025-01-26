@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import bookMarKOff from '../assets/icon-bookmark-empty.svg';
 import bookMarkOn from '../assets/icon-bookmark-full.svg';
 import { useSelector } from 'react-redux';
+import movie from '../assets/icon-category-movie.svg';
+import  tv  from '../assets/icon-category-tv.svg'
 
 interface Thumbnail {
   trending: {
@@ -134,7 +136,7 @@ export const Movies = () => {
                     className="column is-6-mobile is-4-tablet is-3-desktop is-relative"
                   >
                     <img className ="image" src={url+item.thumbnail.regular.small} />
-                    <div className='is-overlay has-text-centered'>
+                    <div className='is-overlay has-text-right py-3 px-3'>
                       <button 
                         className="button is-dark is-rounded"
                         onClick={() => bookmarkHandler(item.id)}
@@ -142,11 +144,18 @@ export const Movies = () => {
                         <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                       </button>
                     </div>
-                    <p>{item.year}</p>
-                    <p>{item.category}</p>
-                    <p>{item.rating}</p>
+                    <div className="has-text-white is-size-7 my-1">
+                      <span className="mr-1">{item.year} ·</span>
+                      <span className="mr-1">
+                        <span className="mr-1">
+                          <img src={item.category.toLowerCase() == "movie" ? movie : tv}></img>
+                        </span>
+                        {item.category} ·
+                      </span> 
+                      <span className="mr-1">{item.rating}</span> 
+                    </div>
                     <div className="item-text">
-                      <div className="title">{item.title}</div>
+                      <div className="has-text-white is-size-5 has-text-weight-semibold">{item.title}</div>
                     </div>
                   </div> 
                 )
