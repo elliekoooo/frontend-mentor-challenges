@@ -3,7 +3,7 @@ import avatar from '../assets/image-avatar.png'
 
 import './SideBar.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {  curr, menuObject } from '../store';
+import {  curr } from '../store';
 
 export const SideBar = () => {
     const dispatch = useDispatch();

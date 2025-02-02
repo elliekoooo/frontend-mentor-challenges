@@ -124,9 +124,9 @@ export const Movies = () => {
 
     return (
         <>
-          <div className="has-text-white is-size-4">{searchWord.length == 0 ? "" : "Found "+ (filterData.length) +" results for "+ searchWord}</div>
-          <h1 className='title has-text-white'>
-            { title }
+          <div className="has-text-white outfit-h-l">{searchWord.length == 0 ? "" : "Found "+ (filterData.length) +" results for "+ searchWord}</div>
+          <h1 className='has-text-white outfit-h-l my-2'>
+            { searchWord.length == 0 ? title : ""}
           </h1>
           <div className="columns is-multiline is-mobile is-2">
               {filterData!.map((item) => {
@@ -144,18 +144,18 @@ export const Movies = () => {
                         <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                       </button>
                     </div>
-                    <div className="has-text-white is-size-7 my-1">
-                      <span className="mr-1">{item.year} ·</span>
+                    <div className="has-text-white my-1">
+                      <span className="mr-1 outfit-b-s">{item.year} ·</span>
                       <span className="mr-1">
-                        <span className="mr-1">
+                        <span className="mr-1 outfit-b-s">
                           <img src={item.category.toLowerCase() == "movie" ? movie : tv}></img>
                         </span>
-                        {item.category} ·
+                        <span className="outfit-b-s">{item.category} ·</span>  
                       </span> 
-                      <span className="mr-1">{item.rating}</span> 
+                      <span className="mr-1 outfit-b-s">{item.rating}</span> 
                     </div>
                     <div className="item-text">
-                      <div className="has-text-white is-size-5 has-text-weight-semibold">{item.title}</div>
+                      <div className="has-text-white outfit-b-l has-text-weight-semibold">{item.title}</div>
                     </div>
                   </div> 
                 )
