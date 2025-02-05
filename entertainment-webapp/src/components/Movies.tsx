@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import bookMarKOff from '../assets/icon-bookmark-empty.svg';
 import bookMarkOn from '../assets/icon-bookmark-full.svg';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setItem, toggle } from '../store/index';
+
 
 interface Thumbnail {
   trending: {
@@ -30,7 +32,6 @@ export interface Category {
   category : string;
 }
 
-
 export const Movies = () => {
   const [ data , setData ] = useState<MovieSeries[]>([]);
   const [ loading , setLoading ] = useState<boolean>(true);
@@ -38,10 +39,10 @@ export const Movies = () => {
 
   const [filterData, setFilterData] = useState<MovieSeries[]>([]);
 
+  const dispatch = useDispatch();
   const currentMenu = useSelector((state:any) => state.menuReducer);
   const searchWord = useSelector((state:any) => state.searchReducer);
-
-  let url = 'http://localhost:5173/src/';
+  const currentItems = useSelector((state : any) => state.itemReducer);
 
     useEffect( () => {
        fetch('http://localhost:5173/src/assets/data.json')
@@ -57,7 +58,10 @@ export const Movies = () => {
           ...item,
           id: index + Math.random(),
         }));
+
+        dispatch(setItem(updatedData));
         setData(updatedData);
+        console.log(currentItems);
         setFilterData(updatedData);       
         setLoading(false);
       })
@@ -88,14 +92,14 @@ export const Movies = () => {
     }, [searchWord]);
     
 
-   const bookmarkHandler = (id : string) => {
-      const updateBookmark = data.map((item : MovieSeries) =>
-      item.id == id ? { ...item, isBookmarked: !item.isBookmarked } : item
-    );
-    setData(updateBookmark);
+   const handleToggleBookmark = (id : string) => {
+      dispatch(toggle(id)) ;
+    // const updateBookmark = data.map((item : MovieSeries) =>
+    //   item.id == id ? { ...item, isBookmarked: !item.isBookmarked } : item
+    // );
+    // setData(updateBookmark);
+    console.log(currentItems);
    }
-
-
 
     if(error){
       return <div>error: {error}</div>;
@@ -127,17 +131,17 @@ export const Movies = () => {
             { title }
           </h1>
           <div className="columns is-multiline is-mobile is-2">
-              {filterData!.map((item) => {
+              {currentItems!.map((item : MovieSeries) => {
                 return (
                   <div 
                     key={item.id} 
                     className="column is-6-mobile is-4-tablet is-3-desktop is-relative"
                   >
-                    <img className ="image" src={url+item.thumbnail.regular.small} />
+                    <img className ="image" src={'http://localhost:5173/src/'+item.thumbnail.regular.small} />
                     <div className='is-overlay has-text-centered'>
                       <button 
                         className="button is-dark is-rounded"
-                        onClick={() => bookmarkHandler(item.id)}
+                        onClick={()=>{ handleToggleBookmark(item.id)}}
                       >
                         <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                       </button>
