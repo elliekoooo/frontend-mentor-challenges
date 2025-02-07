@@ -38,7 +38,7 @@ const initialState : itemsState = {
     items : [],
 };
 
-const itemReducer = createSlice({
+const itemsReducer = createSlice({
     name: 'items',
     initialState,
     reducers: {
@@ -54,16 +54,6 @@ const itemReducer = createSlice({
         },
     },
 });
-
-// const bookmarkReducer = createSlice({
-//     name: "bookmarkReducer",
-//     initialState: false,
-//     reducers: {
-//         change: (state: boolean, _action: PayloadAction<boolean>) => {
-//             return !state;
-//         }
-//     }
-// });
 
 
 const searchReducer = createSlice({
@@ -92,15 +82,13 @@ const menuReducer = createSlice({
 const store = configureStore({
     reducer: {
         searchReducer: searchReducer.reducer,
-       // bookmarkReducer: bookmarkReducer.reducer,
-        itemReducer : itemReducer.reducer,
+        itemsReducer : itemsReducer.reducer,
         menuReducer: menuReducer.reducer
     }
 });
 
-export const { setItems, change } = itemReducer.actions;
+export const { setItems, change } = itemsReducer.actions;
 export const { get, set } = searchReducer.actions;
 export const { curr } = menuReducer.actions;
-//export const { change } = bookmarkReducer.actions;
 
 export default store;

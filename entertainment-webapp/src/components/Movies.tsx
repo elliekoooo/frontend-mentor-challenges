@@ -71,6 +71,11 @@ export const Movies = () => {
       });
     }, []);// 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행
 
+    useEffect(() => {
+      console.log("currentItems updated:", currentItems); // currentItems 상태 변경 후 출력
+  }, [currentItems]); // currentItems가 변경될 때마다 실행
+
+
     //side bar 선택에 따라서 데이터 뿌려주기
     useEffect(() => {
         const _data = data;
@@ -93,10 +98,6 @@ export const Movies = () => {
 
    const handleToggleBookmark = (id : string) => {
       dispatch(change(id)) ;
-    // const updateBookmark = data.map((item : MovieSeries) =>
-    //   item.id == id ? { ...item, isBookmarked: !item.isBookmarked } : item
-    // );
-    // setData(updateBookmark);
    }
 
     if(error){
@@ -132,13 +133,11 @@ export const Movies = () => {
               {filterData!.map((item : MovieSeries) => {
                 return (
                   <div key={item.id} className="column is-6-mobile is-4-tablet is-3-desktop is-relative">
-                    <div>
-                      <img className ="image is-radiusless m-1" src={'http://localhost:5173/src/'+item.thumbnail.regular.small} />
-                      <div className='has-text-right is-overlay'>
-                        <button className='mt-5 mr-4 is-rounded has-background-dark' type="button" onClick={()=>{ handleToggleBookmark(item.id)}}>
-                          <img className="image is-11x11" src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
-                        </button>
-                      </div>
+                    <img className ="image is-fullwidth is-radiusless m-1" src={'http://localhost:5173/src/'+item.thumbnail.regular.small} />
+                    <div className='has-text-right is-overlay'>
+                      <button className='mt-5 mr-4 is-rounded has-background-dark' type="button" onClick={()=>{ handleToggleBookmark(item.id)}}>
+                        <img className="image is-11x11" src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                      </button>
                     </div>
                     <div className="columns is-0 mt-1 mb-0 has-text-white">
                         <div className="column is-2">{item.year}</div>
