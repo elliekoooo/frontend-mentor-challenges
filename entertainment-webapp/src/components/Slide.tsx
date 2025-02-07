@@ -1,9 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 
-
 export const Slide = (props : any) => {
-
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const ref = useRef(null);
   const totalImages =  props.children.length; //슬라이스 갯수

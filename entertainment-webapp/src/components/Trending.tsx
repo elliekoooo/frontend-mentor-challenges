@@ -80,35 +80,22 @@ export const Trending = () => {
             {data.filter((item) => item.isTrending == true).map((item, index) => {
               return (
                   <div key={index} className="column is-6-mobile is-4-tablet is-4-desktop  is-relative ">
-                    <img className ="image is-4by3 " src={imaUrl+item.thumbnail.regular.medium} />
-                    <div className='is-overlay has-text-centered'>
-                     
-                          
-                      <div className="columns is-multiline is-mibile">
-                        <div className="column is-full">
-                          <button 
-                            className="button is-dark is-rounded has-background-dark"
-                            onClick={() => bookmarkHandler(item.id)}
-                          >
-                            <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
-                          </button>
+                    <img className ="image" src={imaUrl+item.thumbnail.regular.medium} />
+                    <div className=" is-overlay mt-5 mr-5 has-text-right">
+                      <button className="button  is-rounded has-background-dark" onClick={() => bookmarkHandler(item.id)}>
+                        <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                      </button>
+                      <div className="ml-5 mb-5 is-align-content-flex-end is-align-content-end">
+                        <div className="columns ml-0">
+                          <div className="column m-0 p-0 is-1">{item.year}</div>
+                          <div className="column m-0 p-0 is-4 has-text-centered"><img src={item.category == 'Movie' ? movie : tv}/> {item.category} </div>
+                          <div className="column m-0 p-0 is-1">{item.rating}</div>
                         </div>
-                        <div className="column pb-0 is-full">
-                            <div className="columns  subtitle is-6 has-text-grey-lighter ">
-                              <div className="column">{item.year}</div>
-                              <div className="column">
-                                  <img src={item.category == 'Movie' ? movie : tv}/>
-                                  {item.category}
-                              </div>
-                              <div className="column">{item.rating}</div>
-                            </div>
-                        </div>
-                        <div className="column is-full is-12 ">
-                          <p className='title is-4 has-text-white-ter has-text-left has-text-weight-semibold'>{item.title}</p>
-                        </div>
+                        <div className='title is-4 has-text-white has-text-left has-text-weight-semibold'>{item.title}</div>
                       </div>
-                   
+                       
                     </div>
+                      
                   </div> 
                 )
             })}
