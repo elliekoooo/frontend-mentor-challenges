@@ -22,9 +22,9 @@ export const Slide = (props : any) => {
     return () => clearInterval(interval); 
   }, []);
 
-  // useEffect(() => {
-  //   updateCarousel();
-  // }, [currentIndex]); 
+  useEffect(() => {
+    updateCarousel();
+  }, [currentIndex]); 
 
     return (
         <div className="container is-clipped" >
