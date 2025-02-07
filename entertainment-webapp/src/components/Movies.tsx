@@ -6,6 +6,7 @@ import { setItems, change } from '../store/index';
 import movie from '../assets/icon-category-movie.svg'
 import tv from '../assets/icon-category-tv.svg'
 
+
 interface Thumbnail {
   trending: {
     small: string;
@@ -120,24 +121,38 @@ export const Movies = () => {
 
     return (
         <>
-          <div className="has-text-white is-size-4">{searchWord.length == 0 ? "" : "Found "+ (filterData.length) +" results for "+ searchWord}</div>
-          <h1 className='title has-text-white'>
-            { title }
+          <div className="has-text-white outfit-h-l">{searchWord.length == 0 ? "" : "Found "+ (filterData.length) +" results for "+ searchWord}</div>
+          <h1 className='has-text-white outfit-h-l my-2'>
+            { searchWord.length == 0 ? title : ""}
           </h1>
           <div className="columns pt-0 is-multiline is-mobile is-2">
               {filterData!.map((item : MovieSeries) => {
                 return (
-                  <div key={item.id} className="column is-6-mobile is-4-tablet is-3-desktop is-relative">
-                    <img className ="image is-fullwidth is-radiusless m-1" src={'http://localhost:5173/src/'+item.thumbnail.regular.small} />
-                    <div className='has-text-right is-overlay'>
-                      <button className='mt-5 mr-4 is-rounded has-background-dark' type="button" onClick={()=>{ handleToggleBookmark(item.id)}}>
-                        <img className="image is-11x11" src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                  <div 
+                    key={item.id} 
+                    className="column is-6-mobile is-4-tablet is-3-desktop is-relative"
+                  >
+                    <img className ="image" src={url+item.thumbnail.regular.small} />
+                    <div className='is-overlay has-text-right py-3 px-3'>
+                      <button 
+                        className="button is-dark is-rounded"
+                        onClick={() => bookmarkHandler(item.id)}
+                      >
+                        <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                       </button>
                     </div>
-                    <div className="columns is-0 mt-1 mb-0 has-text-white">
-                        <div className="column is-2">{item.year}</div>
-                        <div className="column is-4 has-text-centered"> <img src={item.category == 'Movie' ? movie : tv}/> {item.category}</div>
-                        <div className="column is-1">{item.rating}</div>
+                    <div className="has-text-white my-1">
+                      <span className="mr-1 outfit-b-s">{item.year} ·</span>
+                      <span className="mr-1">
+                        <span className="mr-1 outfit-b-s">
+                          <img src={item.category.toLowerCase() == "movie" ? movie : tv}></img>
+                        </span>
+                        <span className="outfit-b-s">{item.category} ·</span>  
+                      </span> 
+                      <span className="mr-1 outfit-b-s">{item.rating}</span> 
+                    </div>
+                    <div className="item-text">
+                      <div className="has-text-white outfit-b-l has-text-weight-semibold">{item.title}</div>
                     </div>
                     <div className="title is-size-4 has-text-weight-medium has-text-white">{item.title}</div>
                   </div> 
