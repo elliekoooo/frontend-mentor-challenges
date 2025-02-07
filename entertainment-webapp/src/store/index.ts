@@ -42,16 +42,15 @@ const itemReducer = createSlice({
     name: 'items',
     initialState,
     reducers: {
-        setItem : (state , action) => {
+        setItems : (state , action) => {
             state.items = action.payload;
         },
-        toggle : (state  , action ) => {
+        change : (state  , action ) => {
             const itemId = action.payload;
-            const item = state.items.find(item => item.id === itemId);
-                if(item){
-                    item.isBookmarked = !item.isBookmarked;
-                }
-            
+            const seletedItem =  state.items.find(item => item.id === itemId)
+            if(seletedItem){
+                seletedItem.isBookmarked = !seletedItem.isBookmarked;
+            }
         },
     },
 });
@@ -99,7 +98,7 @@ const store = configureStore({
     }
 });
 
-export const { setItem, toggle } = itemReducer.actions;
+export const { setItems, change } = itemReducer.actions;
 export const { get, set } = searchReducer.actions;
 export const { curr } = menuReducer.actions;
 //export const { change } = bookmarkReducer.actions;
