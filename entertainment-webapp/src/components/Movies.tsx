@@ -71,11 +71,6 @@ export const Movies = () => {
       });
     }, []);// 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행
 
-    useEffect(() => {
-      console.log("currentItems updated:", currentItems); // currentItems 상태 변경 후 출력
-  }, [currentItems]); // currentItems가 변경될 때마다 실행
-
-
     //side bar 선택에 따라서 데이터 뿌려주기
     useEffect(() => {
         const _data = data;
