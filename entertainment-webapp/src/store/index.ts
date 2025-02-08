@@ -1,4 +1,5 @@
 import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
+import rawData from "../assets/data.json";
 
 export const menuObject = {
     home: "movies or TV series",
@@ -34,36 +35,26 @@ interface itemsState {
     items : item[];
 }
 
-const initialState : itemsState = {
-    items : [],
-};
 
 const itemsReducer = createSlice({
-    name: 'items',
-    initialState,
+    name: 'itemsReducer',
+    initialState: rawData.map((item:any, index:number) => ({...item, id: index})),
     reducers: {
-        setItems : (state , action) => {
-            state.items = action.payload;
-        },
-        change : (state  , action ) => {
-            const itemId = action.payload;
-            const seletedItem =  state.items.find(item => item.id === itemId)
-            if(seletedItem){
-                seletedItem.isBookmarked = !seletedItem.isBookmarked;
-            }
+        toggle : (state, action:PayloadAction<item>) => {
+            const selectedItem = state.find((item)=>item.id==action.payload.id);
+            selectedItem.isBookmarked = !selectedItem.isBookmarked;
         },
     },
 });
-
 
 const searchReducer = createSlice({
     name: "searchReducer",
     initialState: "",
     reducers: {
-        get: (state: string) => {
+        getWords: (state: string) => {
             return state;
         },
-        set: (_state: string, action: PayloadAction<string>) => {
+        setWords: (_state: string, action: PayloadAction<string>) => {
             return action.payload;      
         }
     }
@@ -87,8 +78,8 @@ const store = configureStore({
     }
 });
 
-export const { setItems, change } = itemsReducer.actions;
-export const { get, set } = searchReducer.actions;
+export const { toggle } = itemsReducer.actions;
+export const { getWords, setWords } = searchReducer.actions;
 export const { curr } = menuReducer.actions;
 
 export default store;
