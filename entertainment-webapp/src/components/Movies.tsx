@@ -40,6 +40,7 @@ export const Movies = () => {
   const dispatch = useDispatch();
 
   //side bar 선택에 따라서 데이터 뿌려주기
+  //data 변경시 데이터 뿌려주기(현재 rawdata 변경되는건 bookmark뿐임)
   useEffect(() => {
       const _data = data;
 
@@ -89,12 +90,11 @@ export const Movies = () => {
                 <div 
                   key={item.id} 
                   className="column is-6-mobile is-4-tablet is-3-desktop is-relative">
-                  <img className ="image" src={item.thumbnail.regular.small} />
-                  <div className='is-overlay has-text-right py-3 px-3'>
-                    <button 
-                      className="button is-dark is-rounded"
-                      onClick={() =>  dispatch(toggle(item))}
-                    >
+                  <figure className="image">
+                    <img src={item.thumbnail.regular.small} />                    
+                  </figure>  
+                  <div className='is-overlay has-text-right'>
+                    <button className="button is-dark is-rounded px-2 mx-3 my-3" onClick={() => dispatch(toggle(item))}>
                       <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                     </button>
                   </div>
