@@ -1,4 +1,4 @@
-import search from '../assets/icon-search.svg';
+import search from '/assets/icon-search.svg';
 import './Search.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { menuObject, setWords } from '../store/index'

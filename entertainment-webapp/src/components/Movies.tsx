@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import bookMarKOff from '../assets/icon-bookmark-empty.svg';
-import bookMarkOn from '../assets/icon-bookmark-full.svg';
+import bookMarKOff from '/assets/icon-bookmark-empty.svg';
+import bookMarkOn from '/assets/icon-bookmark-full.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from '../store/index';
-import movie from '../assets/icon-category-movie.svg'
-import tv from '../assets/icon-category-tv.svg'
+import movie from '/assets/icon-category-movie.svg'
+import tv from '/assets/icon-category-tv.svg'
 
 
 interface Thumbnail {
@@ -38,9 +38,6 @@ export const Movies = () => {
   const [filteredData,setData] = useState<MovieSeries[]>(data);
 
   const dispatch = useDispatch();
-
-
-  let url = "http://localhost:5173/src/";
 
   //side bar 선택에 따라서 데이터 뿌려주기
   useEffect(() => {
@@ -92,7 +89,7 @@ export const Movies = () => {
                 <div 
                   key={item.id} 
                   className="column is-6-mobile is-4-tablet is-3-desktop is-relative">
-                  <img className ="image" src={url+item.thumbnail.regular.small} />
+                  <img className ="image" src={item.thumbnail.regular.small} />
                   <div className='is-overlay has-text-right py-3 px-3'>
                     <button 
                       className="button is-dark is-rounded"

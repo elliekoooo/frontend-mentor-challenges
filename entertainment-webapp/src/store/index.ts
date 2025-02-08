@@ -1,5 +1,5 @@
 import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
-import rawData from "../assets/data.json";
+import rawData from "../json/data.json";
 
 export const menuObject = {
     home: "movies or TV series",
@@ -30,11 +30,6 @@ interface item {
     isBookmarked: boolean;
     isTrending: boolean;
 }
-
-interface itemsState {
-    items : item[];
-}
-
 
 const itemsReducer = createSlice({
     name: 'itemsReducer',

@@ -1,5 +1,5 @@
-import logo from '../assets/logo.svg'
-import avatar from '../assets/image-avatar.png'
+import logo from '/assets/logo.svg'
+import avatar from '/assets/image-avatar.png'
 
 import './SideBar.css';
 import { useDispatch, useSelector } from 'react-redux';
