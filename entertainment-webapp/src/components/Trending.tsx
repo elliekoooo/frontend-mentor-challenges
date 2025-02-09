@@ -4,8 +4,8 @@ import { Slide } from './Slide';
 import bookMarKOff from '../assets/icon-bookmark-empty.svg';
 import bookMarkOn from '../assets/icon-bookmark-full.svg';
 
-import movie from '../assets/icon-category-movie.svg'
-import tv from '../assets/icon-category-tv.svg'
+import movie from '../assets/icon-nav-movies.svg'
+import tv from '../assets/icon-nav-tv-series.svg'
 // 데이터 타입 정의
 interface Thumbnail {
   trending: {
@@ -79,22 +79,23 @@ export const Trending = () => {
           <Slide>
             {data.filter((item) => item.isTrending == true).map((item, index) => {
               return (
-                  <div key={index} className="column is-6-mobile is-4-tablet is-4-desktop  is-relative ">
-                    <img className ="image is-fullwidth" src={imaUrl+item.thumbnail.regular.medium} />
-                    <div className=" is-overlay mt-5 mr-5 has-text-right">
-                      <button className="button  is-rounded has-background-dark" onClick={() => bookmarkHandler(item.id)}>
-                        <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
-                      </button>
-                      <div className="ml-5 mb-5 is-align-content-flex-end is-align-content-end">
-                        <div className="columns ml-0">
-                          <div className="column m-0 p-0 is-1">{item.year}</div>
-                          <div className="column m-0 p-0 is-4 has-text-centered"><img src={item.category == 'Movie' ? movie : tv}/> {item.category} </div>
-                          <div className="column m-0 p-0 is-1">{item.rating}</div>
+                  <div key={index} className="column 	mx-2 p-0 is-6-mobile is-4-tablet is-4-desktop  is-relative ">
+                      <img className ="image is-fullwidth" src={imaUrl+item.thumbnail.regular.medium} />
+                      <div className="pt-5 pr-4 is-flex is-overlay is-flex-direction-column is-align-items-flex-end is-justify-content-flex-start">
+                        <button className="button  is-rounded has-background-dark" onClick={() => bookmarkHandler(item.id)}>
+                          <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                        </button>
+                      </div>
+                      <div className="pb-6  pl-4 is-flex is-overlay is-flex-direction-column is-align-items-flex-start is-justify-content-end">
+                        <div className="is-flex">
+                          <div className="is-3 mr-4 has-text-grey-lighter">{item.year}</div>
+                          <div className="is-3 mr-4 has-text-grey-lighter"><img src={item.category == 'Movie' ? movie : tv}/> {item.category} </div>
+                          <div className="is-3 has-text-grey-lighter">{item.rating}</div>
+                      
                         </div>
+                        
                         <div className='title is-4 has-text-white has-text-left has-text-weight-semibold'>{item.title}</div>
                       </div>
-                       
-                    </div>
                       
                   </div> 
                 )
