@@ -3,9 +3,8 @@ import { Contents } from './layout/Contents'
 import { SideBar } from './layout/SideBar'
 
 function App() {
-
   return (
-      <div className="columns">
+      <div className="columns outfit">
         <div className="column is-1">
           <SideBar></SideBar>
         </div>

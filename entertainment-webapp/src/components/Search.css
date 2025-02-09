@@ -1,4 +1,4 @@
-.border-style {
+input:focus {
     border-bottom: 1px solid gray;
 }
 
