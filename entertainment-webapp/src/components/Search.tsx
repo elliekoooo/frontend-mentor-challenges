@@ -1,7 +1,7 @@
-import search from '../assets/icon-search.svg';
+import search from '/assets/icon-search.svg';
 import './Search.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { menuObject, set } from '../store/index'
+import { menuObject, setWords } from '../store/index'
 
 export const Search = () => {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const Search = () => {
                     </figure>
                 </div>
                 <div className="control is-expanded">
-                    <input type='text' onChange={(e)=>{ dispatch(set(e.target.value))}} 
+                    <input type='text' onChange={(e)=>{ dispatch(setWords(e.target.value))}} 
                        className="input no-border has-background-black is-size-5 has-text-white" placeholder={"Search for " + menuObject[menu]}></input>
                     <p className="border-style ml-3 mr-5"></p>
                 </div>
