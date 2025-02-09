@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from '../store/index';
 import { useEffect, useState } from 'react';
 
+
 // 데이터 타입 정의
 interface Thumbnail {
   trending: {
@@ -69,23 +70,6 @@ export const Trending = () => {
                         <div className="outfit-h-m">{item.title}</div>
                       </div>
                     </div>
-                    {/* <div className=" is-overlay mt-5 mr-5 has-text-right">
-                      <button className="button  is-rounded has-background-dark" 
-                         onClick={() => dispatch(toggle(item))}
-                      >
-                        <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
-                      </button>
-                      <div className="ml-5 mb-6 is-align-content-flex-end is-align-content-end">
-                        <div className="columns ml-0">
-                          <div className="column m-0 p-0 is-1">{item.year}</div>
-                          <div className="column m-0 p-0 is-4 has-text-centered"><img src={item.category == 'Movie' ? movie : tv}/> {item.category} </div>
-                          <div className="column m-0 p-0 is-1">{item.rating}</div>
-                        </div>
-                        <div className='title is-4 has-text-white has-text-1 has-text-weight-semibold'>{item.title}</div>
-                      </div>
-                       
-                    </div> */}
-                      
                   </div> 
                 )
             })}
