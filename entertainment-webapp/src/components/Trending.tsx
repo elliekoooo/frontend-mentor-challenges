@@ -31,10 +31,11 @@ interface MovieSeries {
 }
 
 export const Trending = () => {
-
-  const [data , setData ] = useState<MovieSeries[]>([]);
-  const [loading, setLoading ] = useState<boolean>(true);
+  const [ data , setData ] = useState<MovieSeries[]>([]);
+  const [ loading , setLoading ] = useState<boolean>(true);
   const [ error , setError ] = useState<string>();
+
+  let imaUrl = 'http://localhost:5173/src/';
 
   const bookmarkHandler = (id : string) => {
     const updateBookmark = data.map((item : MovieSeries) =>
@@ -43,7 +44,6 @@ export const Trending = () => {
   setData(updateBookmark);
  }
 
-  let imaUrl = 'http://localhost:5173/src/';
     useEffect( () => {
        fetch("http://localhost:5173/src/assets/data.json")
       .then((response) => {
@@ -80,7 +80,7 @@ export const Trending = () => {
             {data.filter((item) => item.isTrending == true).map((item, index) => {
               return (
                   <div key={index} className="column is-6-mobile is-4-tablet is-4-desktop  is-relative ">
-                    <img className ="image" src={imaUrl+item.thumbnail.regular.medium} />
+                    <img className ="image is-fullwidth" src={imaUrl+item.thumbnail.regular.medium} />
                     <div className=" is-overlay mt-5 mr-5 has-text-right">
                       <button className="button  is-rounded has-background-dark" onClick={() => bookmarkHandler(item.id)}>
                         <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
