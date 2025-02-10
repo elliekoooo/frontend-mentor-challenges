@@ -1,3 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 html {
     background-color: black !important;
 }
+
+.outfit {
+    font-family: "Outfit", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.outfit-h-l {
+    font-size: 32px;
+}
+
+.outfit-h-m {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.outfit-h-s {
+    font-size: 24px;
+}
+
+.outfit-h-xs {
+    font-size: 18px;
+}
+
+.outfit-b-m {
+    font-size: 15px;
+}
+
+.outfit-b-s {
+    font-size: 13px;
+}
+
+
+
+

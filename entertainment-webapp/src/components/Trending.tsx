@@ -1,8 +1,14 @@
-import { useState, useEffect } from 'react';
+import { Slide } from './Slide';
 
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import bookMarKOff from '/assets/icon-bookmark-empty.svg';
+import bookMarkOn from '/assets/icon-bookmark-full.svg';
+
+import movie from '/assets/icon-category-movie.svg'
+import tv from '/assets/icon-category-tv.svg'
+import { useDispatch, useSelector } from 'react-redux';
+import { toggle } from '../store/index';
+import { useEffect, useState } from 'react';
+
 
 // 데이터 타입 정의
 interface Thumbnail {
@@ -18,6 +24,7 @@ interface Thumbnail {
 }
 
 interface MovieSeries {
+  id :  string;
   title: string;
   thumbnail: Thumbnail;
   year: number;
@@ -28,77 +35,46 @@ interface MovieSeries {
 }
 
 export const Trending = () => {
+  const data = useSelector((state:any) => state.itemsReducer);
+  const dispatch = useDispatch();
 
-  const [data , setData ] = useState<MovieSeries[]>([]);
-  const [loading, setLoading ] = useState<boolean>(true);
-  const [ error , setError ] = useState<string>();
+  const [filteredData,setData] = useState<MovieSeries[]>(data);
 
-  const settings = {
-    arrows: false, // 화살표 표시 여부
-    autoplay: false, // 자동 재생 설정
-    dots: false, // 페이지네이션을 위한 dots 사용 여부
-    infinite: true, // 슬라이드가 무한반복하도록 적용
-    speed: 1000, // 슬라이드가 넘어가는 속도(ms)
-    slidesToShow: 3, // 한 화면에 몇 개의 슬라이드를 보여줄 것인지
-    slidesToScroll: 1, // 한번에 넘어갈 슬라이드의 갯수
-  };
+  useEffect(() => {
+    setData(data);
+  }, [data]);
 
-  let imaUrl = 'http://localhost:5173/src/';
-    useEffect( () => {
-       fetch("http://localhost:5173/src/assets/data.json")
-      .then((response) => {
-        if(!response.ok) {
-          throw new Error(`HTTP 오류! 상태 코드: ${response.status}`);
-        }
-        return response.json();
-      } )
-      .then( (data) => {
-        setData(data)
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setLoading(true);
-      });
-    }, []);// 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행
-
-    console.log(data);
-
-    
-    if(error){
-      return <div>error: {error}</div>;
-    }
-    if(loading){
-      return <div>Loading...{loading}</div>;
-    }
     return (
-        <div className='section'>
-            <h1 className='title has-text-white'>Trending</h1>
-            {/* <Slider {...settings}> */}
-            <div className='grid is-inline-flex'>
-
-            
-            {data.slice(0, 5).map((item, index) => {
-                return (
-                    <div key={index} className="cell">
-                      <img className ="image" src={imaUrl+item.thumbnail.regular.medium} />
-                      <div className='bookmark'>
-                        <p> {item.isBookmarked ? 'on' : 'off'}</p>
+        <>
+          <h1 className="has-text-white outfit-h-l my-2">Trending</h1>
+          <Slide>
+            {filteredData.filter((item:any) => item.isTrending == true).map((item:any, index:number) => {
+              return (
+                  <div key={index} className="column is-6-mobile is-4-tablet is-4-desktop is-relative">
+                    <img className ="image" src={item.thumbnail.regular.medium} />
+                    <div className='is-overlay has-text-right py-4 px-4'>
+                    <button className="button is-dark is-rounded" onClick={() =>  dispatch(toggle(item))}>
+                      <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
+                    </button>
+                  </div>
+                    <div className="is-flex is-overlay">
+                      <div className="has-text-white mt-auto mb-5 ml-5">
+                        <span className="mr-1 outfit-b-s">{item.year} ·</span>
+                        <span className="mr-1">
+                          <span className="mr-1 outfit-b-s">
+                            <img src={item.category.toLowerCase() == "movie" ? movie : tv}></img>
+                          </span>
+                          <span className="outfit-b-s">{item.category} ·</span>  
+                        </span> 
+                        <span className="mr-1 outfit-b-s">{item.rating}</span> 
+                        <div className="outfit-h-m">{item.title}</div>
                       </div>
-                      <div className="item-text">
-                        <div className="title-sub">
-                          <p>{item.year}</p>
-                          <p>{item.category}</p>
-                          <p>{item.rating}</p>
-                        </div>
-                        <div className="title">{item.title}</div>
-                      </div>
-                    </div> 
-                  )
-              })}
-           {/* </Slider> */}
-           </div>
-        </div>
+                    </div>
+                  </div> 
+                )
+            })}
+          </Slide>
+        </>
    
     );
 }
