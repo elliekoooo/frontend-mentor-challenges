@@ -1,1 +1,9 @@
 @import 'bulma/css/bulma.css';
+
+.full-screen {
+    height: 100vh;
+}
+
+.size {
+    width: 40px;
+}
