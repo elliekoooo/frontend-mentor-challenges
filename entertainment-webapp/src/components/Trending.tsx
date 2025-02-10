@@ -62,7 +62,7 @@ export const Trending = () => {
                             <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                           </button>
                         </div>
-                        <div className="is-align-items-center has-text-centered">
+                        <div className="is-align-self-center has-text-centered">
                           <button className="button button-play is-clickable is-rounded px-3" onClick={() => console.log("==play==")}>
                             <img src={play} className=""></img>
                             <span className="has-text-white mx-3">Play</span>

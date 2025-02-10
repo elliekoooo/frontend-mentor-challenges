@@ -94,20 +94,19 @@ export const Movies = () => {
                   className="column is-6-mobile is-4-tablet is-3-desktop is-relative">
                   <div className="image-container is-relative">
                     <figure className="image">
-                      <img src={item.thumbnail.regular.small} />                    
-                    </figure>  
-                    <div className="is-overlay is-playable is-flex is-flex-direction-column">
-                      <div className="is-align-self-flex-end">
-                        <button className="button is-dark is-rounded px-2 mx-3 my-3" onClick={() => dispatch(toggle(item))}>
+                      <img src={item.thumbnail.regular.small} />
+                    </figure>
+                    <div className="is-overlay is-playable">
+                      <div className="bookmark">
+                        <button className="button is-dark is-rounded px-2 mx-2 my-2" onClick={() =>  dispatch(toggle(item))}>
                           <img src={item.isBookmarked ? bookMarkOn : bookMarKOff } />
                         </button>
                       </div>
-                      {/* FIXME 위치 고쳐야함!! */}
-                      <div className="is-align-items-center has-text-centered my-2">
-                          <button className="button button-play is-clickable is-rounded px-3" onClick={() => console.log("==play==")}>
-                            <img src={play} className=""></img>
-                            <span className="has-text-white mx-3">Play</span>
-                          </button>
+                      <div className="button-center">
+                        <button className="button button-play is-clickable is-rounded px-3" onClick={() => console.log("==play==")}>
+                          <img src={play}></img>
+                          <span className="has-text-white mx-3">Play</span>
+                        </button>
                       </div>
                     </div>
                   </div>
