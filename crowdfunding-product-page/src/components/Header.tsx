@@ -9,7 +9,7 @@ const Header = () => {
 
     return(
     <div className="header">
-      <div className="container is-flex is-align-items-center is-justify-content-space-between py-5">
+      <div className="container is-max-desktop is-flex is-align-items-center is-justify-content-space-between py-5">
         <a className="is-size-5 has-text-weight-bold has-text-white">crowdfund</a>
         <div className={ `navbar-burger has-text-white is-hidden-tablet is-hidden-desktop ${isOpenMenu ? "is-active" : ""}`} onClick={() => menuOpen()}>
             <span aria-hidden="true"></span>
@@ -24,12 +24,11 @@ const Header = () => {
         </div>
       </div>
 
-      <div className={`navbar-menu mx-5  ${isOpenMenu ? "is-active" : ""} `}>
-          <div className="navbar-item is-size-6 has-text-black has-text-weight-medium pl-5 py-4">About</div>
-          <div className="navbar-item is-size-6 has-text-black has-text-weight-medium pl-5 py-3">Discover</div>
-          <div className="navbar-item is-size-6 has-text-black has-text-weight-medium pl-5 py-3">Get Started</div>
+      <div className={`mobile-munu navbar-menu is-hidden-desktop is-hidden-tablet mx-5 py-0 ${isOpenMenu ? "is-active" : ""} `}>
+          <div className="navbar-item is-size-6 has-background-white has-text-black has-text-weight-medium pl-5 py-4">About</div>
+          <div className="navbar-item is-size-6 has-background-white has-text-black has-text-weight-medium pl-5 py-3">Discover</div>
+          <div className="navbar-item is-size-6 has-background-white has-text-black has-text-weight-medium pl-5 py-3">Get Started</div>
       </div>
-      
     </div>
     )
 };
