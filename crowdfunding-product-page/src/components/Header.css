@@ -1,0 +1,24 @@
+
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image : url("../../public/assets/image-hero-desktop.jpg");
+    background-size: 100%;
+    background-repeat : no-repeat;
+    background-position : top;
+}
+.mobile-munu .navbar-item {
+    border-bottom: 1px solid #ddd;
+}
+.blur-background {
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(2px); 
+    z-index: 10; */
+}

@@ -9,9 +9,7 @@ type modal = {
 }
 
 const Modal = ({isOpen ,  closeModal } : any) => {
-
     if(!isOpen) return null;
-
     return (
         <div className={`modal ${isOpen ? 'is-active' : ''}`}  onClick={handleBackdropClick}>
             <div className="modal-background"></div>
@@ -46,8 +44,6 @@ const Modal = ({isOpen ,  closeModal } : any) => {
                 {/* <button className="modal-close is-large my-4" aria-label="close">
                     <img src={close}></img>
                 </button> */}
-                </section>
-
              </div>
         </div>
     );
