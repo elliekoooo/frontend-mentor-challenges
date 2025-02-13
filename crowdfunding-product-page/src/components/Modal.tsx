@@ -44,6 +44,7 @@ const Modal = ({isOpen ,  closeModal } : any) => {
                 {/* <button className="modal-close is-large my-4" aria-label="close">
                     <img src={close}></img>
                 </button> */}
+                </section>
              </div>
         </div>
     );
