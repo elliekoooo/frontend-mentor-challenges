@@ -9,9 +9,7 @@ type modal = {
 }
 
 const Modal = ({isOpen ,  closeModal } : any) => {
-
     if(!isOpen) return null;
-
     return (
         <div className={`modal ${isOpen ? 'is-active' : ''}`}  onClick={handleBackdropClick}>
             <div className="modal-background"></div>
