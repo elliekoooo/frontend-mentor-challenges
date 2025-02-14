@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modal from "./Modal";
+
+import { useDispatch, useSelector } from 'react-redux';
+import { toggle } from '../store/index';
+
 import data from "../json/modal-data.json";
 import "./Content.css";
 import logo from "../../public/assets/logo-mastercraft.svg";
@@ -14,6 +18,9 @@ type modal = {
 
 const Content = () =>{
 
+  const bookmark = useSelector((state:any) => state.bookmarkReducer);
+  const dispatch = useDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isBookmark , setIsBookmark] = useState(false);
   const openModal = () => {
@@ -25,8 +32,15 @@ const Content = () =>{
   }
 
   const handlerBookmark = () =>{
-    setIsBookmark(!isBookmark);
+    console.log("handlerBookmark");
+    dispatch(toggle(bookmark));
+    console.log(bookmark);
   }
+
+  useEffect(() => {
+    console.log("handlerBookmark");
+  }, [bookmark]); // 북마크 상태가 변경될 때마다 isBookmark를 업데이트
+
 
   return (
     <div className="container is-max-tablet">
@@ -40,8 +54,8 @@ const Content = () =>{
           <button  className="button is-success is-rounded has-text-weight-semibold has-text-white px-6 py-0" onClick={openModal}> 
             Back this project
           </button>
-          <button className={`bookmark button p-0 pr-5 is-rounded has-text-weight-semibold ${isBookmark? "on" : ""} `} onClick={handlerBookmark}>
-            <img src={ isBookmark? bookmarkOn : bookmarkOff } className="mr-3"/> Bookmark 
+          <button className={`bookmark button p-0 pr-5 is-rounded has-text-weight-semibold ${bookmark? "on" : ""} `} onClick={handlerBookmark}>
+            <img src={ bookmark? bookmarkOn : bookmarkOff } className="mr-3"/> Bookmark 
           </button>
         </div>
 
@@ -53,7 +67,7 @@ const Content = () =>{
                 Back this project
           </button>
           <div onClick={handlerBookmark}>
-            <img src={ isBookmark? bookmarkOn : bookmarkOff } />
+            <img src={ bookmark? bookmarkOn : bookmarkOff } />
           </div>
         </div>
       </div>
