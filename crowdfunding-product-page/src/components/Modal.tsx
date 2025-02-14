@@ -45,6 +45,7 @@ const Modal = ({isOpen ,  closeModal } : any) => {
                     <img src={close}></img>
                 </button> */}
                 </section>
+
              </div>
         </div>
     );
