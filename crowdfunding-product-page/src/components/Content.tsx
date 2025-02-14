@@ -22,7 +22,6 @@ const Content = () =>{
   const dispatch = useDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
-  const [isBookmark , setIsBookmark] = useState(false);
   const openModal = () => {
     setIsOpen(true);
   }
@@ -32,15 +31,8 @@ const Content = () =>{
   }
 
   const handlerBookmark = () =>{
-    console.log("handlerBookmark");
     dispatch(toggle(bookmark));
-    console.log(bookmark);
   }
-
-  useEffect(() => {
-    console.log("handlerBookmark");
-  }, [bookmark]); // 북마크 상태가 변경될 때마다 isBookmark를 업데이트
-
 
   return (
     <div className="container is-max-tablet">
