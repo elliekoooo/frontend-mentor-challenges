@@ -1,10 +1,10 @@
 import './App.css'
-import { Comments } from './Comments'
+import { List } from './layout/List'
 
 function App() {
   return (
     <div className="is-flex is-align-items-center is-justify-content-center full-screen">
-      <Comments></Comments>
+      <List></List>
     </div>
   )
 }

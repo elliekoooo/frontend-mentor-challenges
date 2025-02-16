@@ -7,3 +7,86 @@
 .size {
     width: 40px;
 }
+
+.score-box {
+    background-color: hsl(228, 33%, 97%);
+    display: flex;
+    height: 100px;
+    min-width: 40px;
+    border-radius: 15%;
+}
+
+.py-custom-1 {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+}
+
+
+/* mobile */
+@media (max-width: 768px) {
+    .score-box {
+        background-color: hsl(228, 33%, 97%);
+        height: 40px;
+        min-width: 100px;
+        border-radius: 15%;
+    }
+
+    .score-box .flex{
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+        margin: auto;
+    }
+
+    .score-box div {
+        flex: 1;
+        text-align: center;
+    }  
+    
+    .py-custom-1 {
+        padding:0;
+    }
+}
+
+.profile {
+    display: flex;
+}
+
+.button-group {
+    border: 0;
+    box-shadow: none;
+}
+
+/* Colors */
+.moderate-blue {
+    background-color: hsl(238, 40%, 52%);
+    color: hsl(0, 0%, 100%);
+}
+
+.soft-red {
+    color: hsl(358, 79%, 66%)
+}
+
+.light-grayish-blue {
+    color: hsl(239, 57%, 85%);
+}
+
+.pale-red {
+    color: hsl(357, 100%, 86%);
+}
+
+.dark-blue {
+    color: hsl(222, 24%, 26%);
+}
+
+.grayish-blue {
+    color: hsl(211, 10%, 45%);
+}
+
+.light-gray {
+    color: hsl(223, 19%, 93%);
+}
+
+.very-light-gray {
+    color: hsl(228, 33%, 97%);
+}
