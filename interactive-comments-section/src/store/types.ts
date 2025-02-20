@@ -8,6 +8,7 @@ export type user = {
 
 export type comment = {
     id: number;
+    cid: number;
     content: string;
     createdAt: string;
     score: number;

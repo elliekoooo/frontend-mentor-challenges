@@ -16,10 +16,10 @@
     border-radius: 15%;
 }
 
-.py-custom-1 {
+/* .py-custom-1 {
     padding-top: 0.25rem !important;
     padding-bottom: 0.25rem !important;
-}
+} */
 
 
 /* mobile */
@@ -57,10 +57,21 @@
     box-shadow: none;
 }
 
+.line {
+    border-left: 2px solid rgb(232, 232, 232);
+    position: relative;
+    left: 25px;
+}
+
 /* Colors */
 .moderate-blue {
-    background-color: hsl(238, 40%, 52%);
+    background-color: hsl(238, 40%, 52%) !important;
+    border-color: hsl(238, 40%, 52%) !important;
     color: hsl(0, 0%, 100%);
+}
+
+.moderate-blue-font {
+    color: hsl(238, 40%, 52%);
 }
 
 .soft-red {
@@ -89,4 +100,12 @@
 
 .very-light-gray {
     color: hsl(228, 33%, 97%);
+}
+
+.modal-content-width {
+    width: 320px !important;
+}
+
+.w-100 {
+    width: 100%;
 }

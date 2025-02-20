@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import Buttons from "./Button";
-import { active, edit } from "../store";
-import { useEffect, useState } from "react";
+import { active, add, edit } from "../store";
+import { useState } from "react";
 import { comment } from "../store/types";
 
 
@@ -10,7 +10,6 @@ export const Editor = ({ type, prop }:any) => {
 
     const data = useSelector((state: any)=> state.data);
     const user = useSelector((state:any)=> state.user);
-    const button = useSelector((state:any)=> state.button);
 
     const [newValue, setNewValue] = useState(type == "edit" ? prop.content : "");
 
@@ -19,13 +18,11 @@ export const Editor = ({ type, prop }:any) => {
     }
 
     const click = () => {
-
-        let _data:comment = {
-            id: type == 'new' ? data.length + 1 : prop.id,
+        let _data: comment = {
+            id: 0,
             content: newValue,
             createdAt: new Date().toDateString(),
             score: 0,
-            replyingTo: type == 'new' ? "" : prop.user.username,
             user: {
                 image: {
                     png: user.image.png,
@@ -33,43 +30,50 @@ export const Editor = ({ type, prop }:any) => {
                 },
                 username: user.username
             },
+            cid: 0,
             type: "c"
         };
+        
+        if(type == 'new'){  
+            _data.id = data.length + 1;
+            _data.cid = data.length + 1;
+            dispatch(add(_data));
 
-        dispatch(edit({
-            type: type,
-            data: _data
-        }));
+        }else if(type == 'reply'){
+            _data.id = data.length + 1;
+            _data.cid = prop.id;
+            _data.replyingTo = prop.user.username
+            dispatch(add(_data));
+        }else if(type == 'edit'){
+            _data.id = prop.id;
+            _data.type = "u"
+            dispatch(edit(_data));
+        }
 
         setNewValue("");
-        dispatch(active({
-            id: 0,
-            type:"",
-            active: true
-        }));
-        
+        dispatch(active({id:0, type:"", active: true}));        
     };
 
     return (
         <div className="columns is-centered">
-            <div className="column is-7-desktop is-8-tablet is-10-mobile">
+            <div className="column is-7-desktop is-8-tablet is-12-mobile">
                 <div className="box is-flex">
                     <div className="mr-auto">
                         <figure className="image is-32x32">
                             <img src={user?.image?.png} alt={user?.username}></img>
                         </figure>
                     </div>
-                    <div style={{"width":"77%"}}>
+                    <div style={{"width":"85%"}} className="mx-1 px-1">
                         <textarea 
-                                    name="test"
                                     className="textarea" 
                                     onChange={handleValueChange}
                                     key={undefined}
                                     value={newValue}
+                                    placeholder={"Add a comment..."}
                                     />
                     </div>
                     <div className="ml-auto">
-                        <Buttons color={"moderate-blue"} disabled={false} text={type == "edit" ? "UPDATE":"SEND"} click={click} type={type}></Buttons>
+                        <Buttons color={"moderate-blue"} disabled={newValue == ""} text={type == "edit" ? "UPDATE":"SEND"} click={click} type={""}></Buttons>
                     </div>
                 </div>
             </div>

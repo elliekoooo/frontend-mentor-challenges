@@ -9,40 +9,37 @@ const dataReducer = createSlice({
     name: "data",
     initialState: rawData.comments,
     reducers: {
-        edit: (state:comment[], action:PayloadAction<{type: string, data: comment}>) => {
-            if(action.payload.type == "reply"){
-                state.map((c:comment)=>{
-                    if(c.id == action.payload.data.id){
-                        c.replies?.push(action.payload.data)
-                    }else{
-                        c.replies?.map(r => {
-                           if(r.id == action.payload.data.id){
-                                c.replies?.push(action.payload.data);
-                           }
-                        });
-                    }
-                })
-            }else if(action.payload.type == "new") {
-                state.push(action.payload.data);
-            }else if(action.payload.type == "edit") {
-                state.map((c:comment)=>{
-                    if(c.id == action.payload.data.id){
-                        c.content = action.payload.data.content;
-                    }else{
-                        c.replies?.map(r => {
-                            if(r.id == action.payload.data.id){
-                                r.content = action.payload.data.content;
-                            }   
-                        });
-                    }
-
-                    return c;
-                });
-            }
-
+        sort: (state: comment[], _action: PayloadAction<comment[]>) => {
+            state.sort((a,b)=> a.cid - b.cid);
         },
-        del: (state, action) => {
-            state = state.filter((c)=>c.id != action.payload.id);   
+        add: (state: comment[], action:PayloadAction<comment>) => {
+            state.push(action.payload);
+        },
+        edit: (state:comment[], action:PayloadAction<comment>) => {
+            state.map((c:comment)=>{
+                if(c.id == action.payload.id){
+                    c.content = action.payload.content;
+                }
+                return c;
+            });
+        },
+        del: (state:comment[], action:PayloadAction<number>) => {
+            state.map((c:comment)=>{
+                if(c.id == action.payload){
+                    c.content = "[Deleted Comment]";
+                    c.type = "d";
+                }
+                return c;
+            });
+        },
+        score: (state:comment[], action:PayloadAction<{type: string, data: comment}>)=> {
+            state.map((c:comment)=> {
+                if(c.id == action.payload.data.id){
+                    if(action.payload.type == "plus") c.score = c.score + 1;
+                    else if(action.payload.type == "minus") c.score = c.score - 1;
+                }
+                return c;
+            });
         }
     }
 });
@@ -68,9 +65,13 @@ const buttonReducer = createSlice({
                 type: action.payload.type,
                 active: !state.active
             }
+        },
+        clear: (_state:{}) => {
+            return {id: 0, type: "", active: false};
         }
     }
 });
+
 
 
 const store = configureStore({
@@ -83,8 +84,8 @@ const store = configureStore({
 
 
 
-export const { edit, del } = dataReducer.actions;
+export const { sort, add, edit, del, score } = dataReducer.actions;
 export const { curr } = userReducer.actions;
-export const { active } = buttonReducer.actions;
+export const { active, clear } = buttonReducer.actions;
 
 export default store;

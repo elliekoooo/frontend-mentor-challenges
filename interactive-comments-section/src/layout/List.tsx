@@ -1,12 +1,25 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { comment } from '../store/types';
 import { Editor } from '../components/Editor';
 import { Comment } from '../components/Comment';
+import { clear, sort } from '../store';
+import { useEffect, useState } from 'react';
+import Modal from '../components/Modal';
 
 
 export const List = () => {
     const _data = useSelector((state:any)=>state.data);
-    const button = useSelector((state:any)=>state.button)
+    const button = useSelector((state:any)=>state.button);
+    
+    const dispatch = useDispatch();
+
+    const closeModal = () => {
+        dispatch(clear());
+    }
+
+    useEffect(()=> {
+        dispatch(sort(_data));
+    }, [_data]);
 
     return (
         <div className="mx-auto my-auto py-6">
@@ -14,6 +27,7 @@ export const List = () => {
                 _data.map((c:comment) => {
                     return (
                         <div key={c.id} className="">
+                            
                             {
                                 (
                                     button.type == "edit" && c.id == button.id ?
@@ -21,7 +35,7 @@ export const List = () => {
                                         <Editor type={"edit"} prop={c}></Editor>
                                     :
 
-                                        <Comment prop={c} type={c.type}></Comment>
+                                        <Comment prop={c}></Comment>
                                 )
                                 
                             }
@@ -35,39 +49,12 @@ export const List = () => {
 
                                 )
                             }
-
-
-                            {/* {
-                                c.replies?.map((r:comment) =>{
-                                    return (
-                                        <>         
-                                            {
-                                                button.type == "edit" && r.id == button.id ?
-                                                    
-                                                    <Editor type={"edit"} prop={r}></Editor>
-                                                :
-            
-                                                    <Comment prop={r} type="reply"></Comment>
-                                                    
-                                            }
-                                            {
-                                            
-                                                button.type == "reply" && button.active && r.id == button.id?
-                                                    <Editor type={"reply"} prop={r}></Editor>
-                                                :
-                                                    <></>
-
-                                            
-                                            }
-                                        </>
-                                    )
-                                })
-                            } */}
                         </div>
                     );
                 })
             }
             <Editor type={"new"}></Editor>
+            <Modal open={button.type == "delete"} close={closeModal} prop={button.id}></Modal>
         </div>
     )
 

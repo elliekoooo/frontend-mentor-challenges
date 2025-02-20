@@ -35,17 +35,18 @@ const Button = ({
     };
     
     return (
-        <div className={"has-addons "+(hidden ? "is-hidden":"")}>
+        <p className={color+" has-addons "+(hidden ? "is-hidden":"")}>
             <button 
-                className={color+" button px-2 button-group py-2 is-size-"+size} disabled={disabled ?? false} 
+                className={color+" button button-group is-size-"+(size ?? 6)} 
+                disabled={disabled ?? false} 
                 onClick={click}
             >
-                <span className={type == "" ? "is-hidden" : "icon is-small mr-1"}>
+                <span className={ type == "" ? "is-hidden" : "icon is-small"}>
                     <img className={"is-size-"+size} src={getIconUrl()}/>
                 </span>
                 <span className={color}>{text}</span>
             </button>
-        </div>
+        </p>
     )
 };
 
