@@ -1,7 +1,7 @@
 # Overview
 
 These small projects showcase my Frontend-Mentor-challenge solutions.<br/>
-I built them as part of my portfolio, using React, TypeScript, and Bulma(or other CSS libraries).<br/>
+I usually built them as part of my portfolio, using React, TypeScript, and Bulma(or other CSS libraries).<br/>
 Each project includes a live demo website.<br/>
 
 
