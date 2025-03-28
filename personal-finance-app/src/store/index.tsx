@@ -20,5 +20,5 @@ const store = configureStore({
 
 export const { get } = _data.actions;
 export default store;
-export type IRootState = ReturnType<typeof store.getState>
+export type rootState = ReturnType<typeof store.getState>
 
