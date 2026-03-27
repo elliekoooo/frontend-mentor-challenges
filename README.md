@@ -7,6 +7,7 @@ Each project includes a live demo website.<br/>
 
 ## Lists
 
+0. personal-finance-app [🔗](https://toy-personal-finance.web.app/)
 1. age-calculator-app [🔗](https://elliekoooo.github.io/frontend-mentor-challenges/age-calculator-app/)
 2. interactive-comments-section [🔗](https://elliekoooo.github.io/frontend-mentor-challenges/interactive-comments-section/)
 3. multi-step-form 
